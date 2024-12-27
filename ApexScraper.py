@@ -13,13 +13,19 @@ response = requests.get(url, headers=headers)
 
 # Check if the request was a success
 if response.status_code == 200:
+    print("Request was a success!")
+
     # Parse the HTML content
     soup = BeautifulSoup(response.content, 'html.parser')
 
     # Find the table containing the standings
     table = soup.find('table')
 
-    print("Request was a success!")
+    if table:
+        #Extract the table headers
+        headers = [header.text for header in table.find_all('th')]
+        
+        print(headers)
 else:
     print("Request was unsuccessful")
 
