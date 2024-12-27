@@ -1,7 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://www.wmclub.org/wp-content/uploads/2024/12/2024standings.htm'
+#standingsUrl = 'https://www.wmclub.org/wp-content/uploads/2024/12/2024standings.htm'
+url = 'https://www.wmclub.org/wp-content/uploads/2024/03/AX1-winter-break-031724_fin.htm'
 
 # Set headers to mimic a browser request
 headers = {
@@ -19,13 +20,13 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.content, 'html.parser')
 
     # Find the table containing the standings
-    table = soup.find_all('table')
+    tables = soup.find_all('table')
 
-    if len(table) < 3:
-        raise ValueError(f"Error: {table.count} tables found. There should be at least 3. Verify URL and page to be scraped")
+    if len(tables) < 3:
+        raise ValueError(f"Error: {len(tables)} tables found. There should be at least 3. Verify URL and page to be scraped")
 
-    if table[2]:
-        raceResultTable = table[2]
+    if tables[2]:
+        raceResultTable = tables[2]
 
         #Extract the table headers
         #headers = [header.text for header in raceResultTable.find_all('th')]
@@ -36,8 +37,9 @@ if response.status_code == 200:
         # Iterate through each row to find each th until a td is found
         headers = []
         tabledata = []
-        
+
         for row in rows:
+            currentRow = []
             for cell in row.children:
                 if cell.name == 'th':
                     headers.append(cell.text.strip())
