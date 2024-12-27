@@ -33,15 +33,16 @@ if response.status_code == 200:
         # Extract the table rows
         rows = raceResultTable.find_all('tr')
 
-        # Iterate through the first row to find each th until a td is found
-        first_row = rows[2]
+        # Iterate through each row to find each th until a td is found
         headers = []
         tabledata = []
-        for cell in first_row.children:
-            if cell.name == 'th':
-                headers.append(cell.text.strip())
-            elif cell.name == 'td':
-                tabledata.append(cell.text.strip())
+        
+        for row in rows:
+            for cell in row.children:
+                if cell.name == 'th':
+                    headers.append(cell.text.strip())
+                elif cell.name == 'td':
+                    tabledata.append(cell.text.strip())
 
         print(headers)
         print(tabledata)
