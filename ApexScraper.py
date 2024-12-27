@@ -28,9 +28,23 @@ if response.status_code == 200:
         raceResultTable = table[2]
 
         #Extract the table headers
-        headers = [header.text for header in raceResultTable.find_all('th')]
+        #headers = [header.text for header in raceResultTable.find_all('th')]
         
+        # Extract the table rows
+        rows = raceResultTable.find_all('tr')
+
+        # Iterate through the first row to find each th until a td is found
+        first_row = rows[2]
+        headers = []
+        tabledata = []
+        for cell in first_row.children:
+            if cell.name == 'th':
+                headers.append(cell.text.strip())
+            elif cell.name == 'td':
+                tabledata.append(cell.text.strip())
+
         print(headers)
+        print(tabledata)
 else:
     print("Request was unsuccessful")
 
