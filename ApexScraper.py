@@ -19,11 +19,16 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.content, 'html.parser')
 
     # Find the table containing the standings
-    table = soup.find('table')
+    table = soup.find_all('table')
 
-    if table:
+    if len(table) < 3:
+        raise ValueError(f"Error: {table.count} tables found. There should be at least 3. Verify URL and page to be scraped")
+
+    if table[2]:
+        raceResultTable = table[2]
+
         #Extract the table headers
-        headers = [header.text for header in table.find_all('th')]
+        headers = [header.text for header in raceResultTable.find_all('th')]
         
         print(headers)
 else:
