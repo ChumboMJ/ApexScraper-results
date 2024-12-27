@@ -1,2 +1,6 @@
+import requests
+from bs4 import BeautifulSoup
 
-print("Hello World! This is gound to be a data scraper for my Apex Project")
+url = 'https://www.wmclub.org/wp-content/uploads/2024/12/2024standings.htm'
+
+print(url)
