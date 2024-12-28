@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import json
 
 #standingsUrl = 'https://www.wmclub.org/wp-content/uploads/2024/12/2024standings.htm'
 url = 'https://www.wmclub.org/wp-content/uploads/2024/03/AX1-winter-break-031724_fin.htm'
@@ -39,15 +40,16 @@ if response.status_code == 200:
         tabledata = []
 
         for row in rows:
-            currentRow = []
-            for cell in row.children:
-                if cell.name == 'th':
-                    headers.append(cell.text.strip())
-                elif cell.name == 'td':
-                    tabledata.append(cell.text.strip())
+            row_data = []
+            for cell in row.find_all(['td']):
+                row_data.append(cell.text.strip())
+            tabledata.append(row_data)
 
-        print(headers)
-        print(tabledata)
+        # Convert the table data to JSON format
+        table_json = json.dumps(tabledata, indent=4)
+        
+        # Print the JSON data
+        print(table_json)
 else:
     print("Request was unsuccessful")
 
