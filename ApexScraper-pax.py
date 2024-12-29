@@ -16,6 +16,15 @@ response = requests.get(url, headers=request_headers)
 
 if response.status_code == 200:
     print("Request was a success!")
+
+    # Parse the HTML Request
+    soup = BeautifulSoup(response.content, 'html.parser')
+
+    # Get each of the table on the page
+    tables = soup.find_all('table')
+
+    # print the number of tables found
+    print("Number of Tables found: " + str(len(tables)))
 else:
     print("Request was unsucessful :(")
 
