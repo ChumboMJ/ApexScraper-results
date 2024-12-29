@@ -33,7 +33,13 @@ if response.status_code == 200:
 
         # Extract the table rows
         rows = paxResultTable.find_all('tr')
-        print(rows)
+
+        table_data = []
+        for row in [rows[1:]]: #skip the header row
+            cells = row.find_all('td')
+            if len(cells) == len (attribute_names):
+                row_data = {attribute_names[i]: cells[i].text.strip() for i in range(len(attribute_names))}
+                table_data.append(row_data)
 
 else:
     print("Request was unsucessful :(")
