@@ -41,7 +41,6 @@ if response.status_code == 200:
         attribute_names = ['position', 'class', 'number', 'driver', 'car', 'color', 'run1', 'run2', 'run3', 'run4', 'run5', 'run6', 'total', 'diff']
 
         print(attribute_names)
-        print(rows)
 
         for row in rows:
             row_data = []
