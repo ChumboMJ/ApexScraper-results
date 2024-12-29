@@ -26,5 +26,13 @@ if response.status_code == 200:
 
     # Print the number of tables on the page
     print('number of tables found: ' + str(len(tables)))
+
+    if tables[1]:
+        rawResultTable = tables[1]
+
+        attribute_names = ['rawPosition', 'classPosition', 'class', 'number', 'driver', 'car', 'rawTime', 'diff', 'fromFirst']
+
+        # Extract the table rows
+        rows = rawResultTable.find_all('tr')
 else:
     print("Request was unsuccessful")
