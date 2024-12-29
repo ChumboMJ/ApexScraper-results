@@ -36,24 +36,22 @@ if response.status_code == 200:
         rows = raceResultTable.find_all('tr')
 
         # Iterate through each row to find each th until a td is found
-        headers = []
-        table_data = []
         attribute_names = ['position', 'class', 'number', 'driver', 'car', 'color', 'run1', 'run2', 'run3', 'run4', 'run5', 'run6', 'total', 'diff']
 
-        print(attribute_names)
-
+        # Extract the data from each row and map to attribute names
+        table_data = []
         for row in rows:
-            row_data = []
-            for cell in row.find_all(['td']):
-                row_data.append(cell.text.strip())
-            table_data.append(row_data)
+            cells = row.find_all('td')
+            # Ensure the number of cells match the number of attributes
+            # If they do not, it's not a data row, so it can be skipped
+            if len(cells) == len(attribute_names):
+                row_data = {attribute_names[i]: cells[i].text.strip() for i in range(len(attribute_names))}
+                table_data.append(row_data) 
 
         # Convert the table data to JSON format
         table_json = json.dumps(table_data, indent=4)
         
         # Print the JSON data
-        #print(table_json)
+        print(table_json)
 else:
     print("Request was unsuccessful")
-
-print(url)
