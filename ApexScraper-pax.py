@@ -35,12 +35,17 @@ if response.status_code == 200:
         rows = paxResultTable.find_all('tr')
 
         table_data = []
-        for row in [rows[1:]]: #skip the header row
+        for row in rows:
             cells = row.find_all('td')
             if len(cells) == len (attribute_names):
                 row_data = {attribute_names[i]: cells[i].text.strip() for i in range(len(attribute_names))}
                 table_data.append(row_data)
 
+        #Convert the table data to JSON format
+        table_json = json.dumps(table_data, indent=4)
+
+        #print the JSON data
+        print(table_json)
 else:
     print("Request was unsucessful :(")
 
