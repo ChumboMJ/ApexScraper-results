@@ -25,6 +25,16 @@ if response.status_code == 200:
 
     # print the number of tables found
     print("Number of Tables found: " + str(len(tables)))
+
+    if tables[1]:
+        paxResultTable = tables[1]
+
+        attribute_names = ['paxPosition', 'classPosition', 'class', 'number', 'driver', 'car', 'total', 'factor', 'paxTime', 'diff', 'fromFirst']
+
+        # Extract the table rows
+        rows = paxResultTable.find_all('tr')
+        print(rows)
+
 else:
     print("Request was unsucessful :(")
 
