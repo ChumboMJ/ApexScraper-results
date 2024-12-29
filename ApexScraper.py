@@ -37,19 +37,23 @@ if response.status_code == 200:
 
         # Iterate through each row to find each th until a td is found
         headers = []
-        tabledata = []
+        table_data = []
+        attribute_names = ['position', 'class', 'number', 'driver', 'car', 'color', 'run1', 'run2', 'run3', 'run4', 'run5', 'run6', 'total', 'diff']
+
+        print(attribute_names)
+        print(rows)
 
         for row in rows:
             row_data = []
             for cell in row.find_all(['td']):
                 row_data.append(cell.text.strip())
-            tabledata.append(row_data)
+            table_data.append(row_data)
 
         # Convert the table data to JSON format
-        table_json = json.dumps(tabledata, indent=4)
+        table_json = json.dumps(table_data, indent=4)
         
         # Print the JSON data
-        print(table_json)
+        #print(table_json)
 else:
     print("Request was unsuccessful")
 
