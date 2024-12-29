@@ -28,9 +28,6 @@ if response.status_code == 200:
 
     if tables[1]:
         raceResultTable = tables[1]
-
-        #Extract the table headers
-        #headers = [header.text for header in raceResultTable.find_all('th')]
         
         # Extract the table rows
         rows = raceResultTable.find_all('tr')
