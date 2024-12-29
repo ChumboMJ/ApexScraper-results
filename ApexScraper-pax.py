@@ -48,5 +48,3 @@ if response.status_code == 200:
         print(table_json)
 else:
     print("Request was unsucessful :(")
-
-print(url)
