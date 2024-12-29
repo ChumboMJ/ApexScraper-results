@@ -2,7 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import json
 
-#standingsUrl = 'https://www.wmclub.org/wp-content/uploads/2024/12/2024standings.htm'
+# Script used for scraping event data, including individual run information
+
 url = 'https://www.wmclub.org/wp-content/uploads/2024/03/AX1-winter-break-031724_fin.htm'
 
 # Set headers to mimic a browser request
