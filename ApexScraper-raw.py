@@ -45,5 +45,15 @@ if response.status_code == 200:
         table_json = json.dumps(table_data, indent=4)
 
         print(table_json)
+
+    #print the race information
+    race_info_table = tables[0]
+    rows = race_info_table.find_all('tr')
+
+    race_info_table_data = []
+    for row in rows[1:]:
+        race_info_table_data.append(row.find('th').text)
+
+    print(race_info_table_data)
 else:
     print("Request was unsuccessful")
