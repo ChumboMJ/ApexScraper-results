@@ -56,5 +56,11 @@ if response.status_code == 200:
         race_info_table_data.append(row.find('th').text)
 
     print(race_info_table_data)
+    
+    first_row_data = race_info_table_data[0].split(' - ')
+    print(first_row_data)
+
+    thrid_row_data = race_info_table_data[2].split(': ')
+    print(thrid_row_data)
 else:
     print("Request was unsucessful :(")
